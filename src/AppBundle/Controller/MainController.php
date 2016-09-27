@@ -4,20 +4,31 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
 
-class MainController
+class MainController extends Controller
 {
     /**
-     * @Route("/main")
+     * @Route("/", name="main_list")
      */
-    public function numberAction()
+    public function index()
     {
         $number = mt_rand(0, 100);
+        return $this->render('main/index.html.twig', array(
+            'number' => $number
+        ));
+    }
 
-        return new Response(
-            '<html><body>Lucky number: '.$number.'</body></html>'
-        );
+    /**
+     * Matches /show/*
+     *
+     * @Route("/show/{slug}", name="main_show")
+     */
+    public function showAction($slug)
+    {
+
+        // ...
     }
 }
